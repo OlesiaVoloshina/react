@@ -1,0 +1,14 @@
+@import '../../constants';
+
+.Error {
+  padding: 10px;
+  background-color: $accent-color;
+  border: none;
+}
+
+.Close {
+  float: right;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}

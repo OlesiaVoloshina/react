@@ -1,0 +1,31 @@
+@import '../../constants';
+
+.FormGroup {
+  display: block;
+  padding: 10px;
+}
+
+.Input {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+.Valid {
+  background-color: $secondary-color;
+  border-width: 1px;
+}
+
+.Invalid {
+  background-color: $accent-color;
+}
+
+.Label {
+  display: block;
+}
+
+.ErrorMessage {
+  display: block;
+  font-size: x-small;
+  font-weight: bold;
+}

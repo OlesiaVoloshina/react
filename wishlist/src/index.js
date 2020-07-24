@@ -1,14 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import {BrowserRouter} from 'react-router-dom';
+import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import createSagaMiddleware from 'redux-saga'
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+import loginReducer from "./reducers/authReducer";
+import loadingReducer from "./reducers/loadReducer";
+import {Provider} from "react-redux";
+import {watchAuth} from "./sagas/userAuthSagas";
+
+const sagaMiddleware = createSagaMiddleware();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware));
+const store = createStore(combineReducers({loading: loadingReducer, login: loginReducer}), enhancer);
+
+sagaMiddleware.run(watchAuth);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

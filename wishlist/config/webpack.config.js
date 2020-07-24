@@ -408,6 +408,7 @@ module.exports = function(webpackEnv) {
                     { helpers: true },
                   ],
                 ],
+                plugins: ['@babel/plugin-proposal-class-properties', "@babel/plugin-transform-react-jsx"],
                 cacheDirectory: true,
                 // See #6846 for context on why cacheCompression is disabled
                 cacheCompression: false,
