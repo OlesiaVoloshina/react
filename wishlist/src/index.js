@@ -6,17 +6,18 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import createSagaMiddleware from 'redux-saga'
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import loginReducer from "./reducers/authReducer";
+import authReducer from "./reducers/authReducer";
 import loadingReducer from "./reducers/loadReducer";
 import {Provider} from "react-redux";
-import {watchAuth} from "./sagas/userAuthSagas";
+import {checkAuth, watchAuth} from "./sagas/userAuthSagas";
 
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware));
-const store = createStore(combineReducers({loading: loadingReducer, login: loginReducer}), enhancer);
+const store = createStore(combineReducers({loading: loadingReducer, auth: authReducer}), enhancer);
 
 sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(checkAuth);
 
 ReactDOM.render(
     <React.StrictMode>

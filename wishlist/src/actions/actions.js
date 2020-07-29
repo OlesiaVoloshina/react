@@ -6,9 +6,11 @@ import {
     LOADING_FINISH,
     LOADING_START,
     HIDE_ERROR,
-    USER_LOADED
+    USER_LOADED, LOGOUT_START, LOGOUT_SUCCESS
 } from "./actionTypes";
 
+export const logoutStartAction = () => { return  {type: LOGOUT_START}};
+export const logoutSuccessAction = () => { return  {type: LOGOUT_SUCCESS}};
 export const loginStartAction = (login, password) => { return  {type: LOGIN_START, login: login, password: password}};
 export const registerStartAction = (login, password, name, birthdate) => { return  {type: REGISTER_START, login: login, password: password, name: name, birthdate: birthdate}};
 export const authSuccessAction = (uid, idToken) => { return  {type: AUTH_SUCCESS, userId: uid, token: idToken}};

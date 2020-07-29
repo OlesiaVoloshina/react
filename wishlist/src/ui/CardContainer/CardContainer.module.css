@@ -1,0 +1,7 @@
+.FlexCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+.ColumnCardContainer {
+  display: block;
+}

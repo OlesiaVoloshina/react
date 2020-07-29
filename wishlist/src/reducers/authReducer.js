@@ -1,12 +1,15 @@
 import {
     AUTH_SUCCESS,
     AUTH_ERROR,
-    USER_LOADED
+    USER_LOADED, LOGOUT_SUCCESS
 } from "../actions/actionTypes";
 
-export default function login(state = {uid: null, token: null, user: null}, action) {
+export default function auth(state = {uid: null, token: null, user: null}, action) {
     let newState;
     switch (action.type) {
+        case LOGOUT_SUCCESS:
+            newState = {loggedIn: false, uid: null, token: null, user: null};
+            return newState;
         case AUTH_SUCCESS:
             newState = {...state, loggedIn: true, uid: action.uid, token: action.token};
             return newState;

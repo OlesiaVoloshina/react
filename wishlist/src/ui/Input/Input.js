@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Input.module.scss'
 
-const input = (props) => {
+const input = React.forwardRef((props, ref) => {
     let value = props.value ? props.value : '';
     let cssClasses = [classes.Input];
     if (props.touched) {
@@ -12,9 +12,9 @@ const input = (props) => {
     return (
         <div className={classes.FormGroup}>
             <span className={classes.Label}>{props.label}</span>
-            <input type={props.type} onChange={props.onChange} className={css} value={value}/>
+            <input ref={ref} type={props.type} onChange={props.onChange} className={css} value={value}/>
             {error}
         </div>
     );
-};
+});
 export default input;

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {minLength, notEmpty} from "../../validations/validations";
 import Button from "../../ui/Button/Button";
 import {useForm} from "../../hooks/useForm";
 import Input from "../../ui/Input/Input";
 import {loginStartAction} from "../../actions/actions";
 import {connect} from "react-redux";
+import {Redirect} from "react-router";
 
 const LoginForm = (props) => {
     const loginForm = {login: "", password: ""};
@@ -17,15 +18,16 @@ const LoginForm = (props) => {
         props.onLogin(values.login, values.password);
     };
 
-
-
     const validators = {
         login: [{name: "required", errorMessage: "Login is required", isValid: (value) => notEmpty(value)},
             {name: "minLength", errorMessage: "Login length should be > 3", isValid: (value) => minLength(value, 3)}],
         password: [{name: "required", errorMessage: "Password is required", isValid: (value) => notEmpty(value)}]
     };
 
-    return (
+    const redirect = props.loggedIn ? <Redirect to="/"/> : null;
+    return(
+        <Fragment>
+        {redirect}
         <form onSubmit={onSubmit}>
             <div className="form">
                 <Input label="Login" type="text" {...useInput("login", validators.login)}/>
@@ -33,7 +35,11 @@ const LoginForm = (props) => {
                 <Button title="Enter" onClick={onSubmit} disabled={!isValid}/>
             </div>
         </form>
-    )
+        </Fragment>);
+};
+
+const mapStateToProps = (state) => {
+    return {loggedIn: state.auth.loggedIn};
 };
 
 const dispatchActions = dispatch => {
@@ -42,4 +48,4 @@ const dispatchActions = dispatch => {
     }
 };
 
-export default connect(null, dispatchActions)(LoginForm);
+export default connect(mapStateToProps, dispatchActions)(LoginForm);
