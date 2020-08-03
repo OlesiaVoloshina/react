@@ -15,6 +15,6 @@ const SearchForm = (props) => {
         }
     }, []);
 
-    return <Input ref={inputRef} value={props.value} type="text" label="Find new friends (Alisa, Alex, etc):" onChange={handleSearchInput}/>;
+    return <Input ref={inputRef} value={props.value} type="text" label={props.label} onChange={handleSearchInput}/>;
 };
 export default SearchForm;

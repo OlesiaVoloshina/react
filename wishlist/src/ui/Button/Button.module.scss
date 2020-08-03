@@ -1,11 +1,15 @@
 @import '../../constants';
 
 .Button {
-  min-width: 70px;
+  min-width: 190px;
   padding: 10px;
-  background-color: $primary-color;
+  background-color: $secondary-color;
   border-radius: 5px;
   border: none;
   cursor: pointer;
   margin: 10px;
+}
+
+.Inactive {
+  background-color: $accent-color;
 }

@@ -36,13 +36,14 @@ const RegisterForm = (props) => {
         <Fragment>
             {redirect}
             <form onSubmit={onSubmit}>
+                <div className="form-header">Create your account:</div>
                 <div className="form">
                     <Input label="Login" type="text" {...useInput("login", validators.login)}/>
                     <Input label="Password" type="text" {...useInput("password", validators.password)}/>
                     <Input label="Name" type="text" {...useInput("name", validators.name)}/>
                     <Input label="Your birthdate" type="date" {...useInput("birthdate", validators.birthdate)}/>
-                    <Button title="Enter" onClick={onSubmit} disabled={!isValid}/>
                 </div>
+                <div className="form-footer"><Button title="Enter" onClick={onSubmit} disabled={!isValid}/></div>
             </form>
         </Fragment>
         );

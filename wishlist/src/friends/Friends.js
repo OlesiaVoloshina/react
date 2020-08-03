@@ -72,8 +72,8 @@ const Friends = (props) => {
     const friendsBlocks = friends.map(friend =>
         <Card key={friend.relId}>
             <span>{friend.name}</span>, <span>birthday at: {new Date(friend.birthdate).toLocaleDateString()}</span>
-            <Button title="See wishes" onClick={() => props.history.push({pathname: "/friends/" + friend.id})}/>
-            <Button style={{float: "right"}} title="Remove from friends" onClick={() => deleteFriend(props.user.id, friend.relId)}/>
+            <Button title="See wishes" onClick={() => props.history.push({pathname: "/wishes/" + friend.id, search: "?name=" + friend.name})}/>
+            <Button title="Remove" onClick={() => deleteFriend(props.user.id, friend.relId)}/>
         </Card>);
 
     const usersBlocks = users.map(user =>
@@ -84,7 +84,7 @@ const Friends = (props) => {
 
     return (
         <CardContainer layout="column">
-            <SearchForm value={searchUser} setValue={setSearchUser} onChange={searchUsers}/>
+            <SearchForm label="Find new friends (Alisa, Alex, etc):" value={searchUser} setValue={setSearchUser} onChange={searchUsers}/>
             {usersBlocks.length > 0 ? <h3 className={classes.FriendsTitle}>Found: </h3> : null}
             {usersBlocks}
             {friendsBlocks.length > 0 ? <h3 className={classes.FriendsTitle}>My Friends: </h3> : null}

@@ -29,11 +29,12 @@ const LoginForm = (props) => {
         <Fragment>
         {redirect}
         <form onSubmit={onSubmit}>
+            <div className="form-header">Login with your email and password:</div>
             <div className="form">
                 <Input label="Login" type="text" {...useInput("login", validators.login)}/>
                 <Input label="Password" type="password" {...useInput("password", validators.password)}/>
-                <Button title="Enter" onClick={onSubmit} disabled={!isValid}/>
             </div>
+            <div className="form-footer"><Button title="Enter" onClick={onSubmit} disabled={!isValid}/></div>
         </form>
         </Fragment>);
 };

@@ -10,6 +10,7 @@ import {Redirect, Route, Switch} from "react-router";
 import {logoutStartAction} from "./actions/actions";
 import HelloUser from "./ui/HelloUser/HelloUser";
 import Friends from "./friends/Friends";
+import Wishes from "./wishes/Wishes";
 
 const icon = "./assets/menuIcon.png";
 
@@ -23,11 +24,15 @@ function App(props) {
         menuItems.push({id: "logout", name: "Logout", clickHandler: props.onLogout});
 
         routes.push(<Route key="friends" path='/friends' component={Friends}/>);
+        routes.push(<Route key="friendsWishes" path='/wishes/:friendId' component={Wishes}/>);
+        routes.push(<Route key="wishes" path='/wishes' component={Wishes}/>);
+        routes.push(<Redirect key="home" from="/" to="/wishes"/>);
     } else {
         menuItems.push({id: "login", name: "Login", path: "/login"});
         menuItems.push({id: "register", name: "Register", path: "/register"});
         routes.push(<Route key="login" path='/login' component={LoginForm}/>);
         routes.push(<Route key="register" path='/register' component={RegisterForm}/>);
+        routes.push(<Redirect key="home" from="/" to="/login"/>);
     }
 
   return (
@@ -37,9 +42,7 @@ function App(props) {
             <Loader/>
             <Error/>
             <Switch>
-                <Redirect from='/home' to='/wishes'/>
                 {routes}
-                <Route render={() => <div>Not found</div>}/>
             </Switch>
         </Layout>
     </div>
